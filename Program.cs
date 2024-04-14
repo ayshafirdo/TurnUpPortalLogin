@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Chrome;
 
 using OpenQA.Selenium.Internal;
+using System.Threading;
 
 //Open Chrome Browser
 IWebDriver webDriver = new ChromeDriver();
@@ -32,6 +33,7 @@ tmOption.Click();
 IWebElement createNew = webDriver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
 createNew.Click();
 //Choose Time Type Code
+Thread.Sleep(1000);
 IWebElement TypeCode = webDriver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[1]/div/span[1]/span/span[1]"));
 TypeCode.Click();
 IWebElement timeType = webDriver.FindElement(By.XPath("//ul[@id='TypeCode_listbox']/li[2]"));
@@ -61,6 +63,7 @@ else
 
 
 //Edit the newly created type code
+Thread.Sleep(1000);
 IWebElement editButton = webDriver.FindElement(By.XPath("/html/body/div[4]/div/div/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
 editButton.Click();
 Thread.Sleep(3000);
@@ -87,8 +90,30 @@ else
 
 
 //Delete the type code
-IWebElement deleteButton = webDriver.FindElement(By.XPath("/html/body/div[4]/div/div/div[3]/table/tbody/tr/td[5]/a[2]"));
+IWebElement deleteButton = webDriver.FindElement(By.XPath("/html/body/div[4]/div/div/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
 deleteButton.Click();
+Thread.Sleep(3000);
+webDriver.SwitchTo().Alert().Accept();
+try 
+{ 
+IWebElement editTypeCodeD = webDriver.FindElement(By.XPath("/html/body/div[4]/div/div/div[3]/table/tbody/tr[4]"));
+
+    Console.WriteLine(" Type Code is deleted");
+}
+catch(NoSuchElementException)
+{
+    Console.WriteLine("Type Code is not deleted");
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
