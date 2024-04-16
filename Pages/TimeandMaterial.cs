@@ -29,11 +29,11 @@ namespace TurnUpPortalLogin.Pages
             timeType.Click();
             //Enter Code,Description and Price per unit
             IWebElement codeTextbox = webDriver.FindElement(By.XPath("//*[@id=\"Code\"]"));
-            codeTextbox.SendKeys("ICTEST2024");
+            codeTextbox.SendKeys("FIRSTIC");
             IWebElement descriptionTextbox = webDriver.FindElement(By.XPath("//*[@id=\"Description\"]"));
             descriptionTextbox.SendKeys("In this project we are going to create time record");
             
-         
+          
            
             IWebElement priceTextbox = webDriver.FindElement(By.XPath("//*[@id = \"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
             priceTextbox.SendKeys("200.00");
@@ -50,10 +50,12 @@ namespace TurnUpPortalLogin.Pages
         public void VerifyNewlyCreatedTimeRecord(IWebDriver webDriver)
         {
             //Verify newly created record on the last page
+            IWebElement lastpagebutton = webDriver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+            lastpagebutton.Click();
             Thread.Sleep(3000);
 
             IWebElement newTypeCode = webDriver.FindElement(By.XPath("/html/body/div[4]/div/div/div[3]/table/tbody/tr[last()]/td[1]"));
-            if (newTypeCode.Text == "ICTEST2024")
+            if (newTypeCode.Text == "FIRSTIC")
             {
                 Console.WriteLine("New Type Code is created successfully");
             }
@@ -66,12 +68,15 @@ namespace TurnUpPortalLogin.Pages
         {
             //Edit the newly created type code
             Thread.Sleep(1000);
+            Console.WriteLine("hi");
+            IWebElement lastpageButton = webDriver.FindElement(By.XPath("/html/body/div[4]/div/div/div[4]/a[4]/span"));
+            lastpageButton.Click();
             IWebElement editButton = webDriver.FindElement(By.XPath("/html/body/div[4]/div/div/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
             editButton.Click();
             Thread.Sleep(3000);
             IWebElement TypeCodeEdit = webDriver.FindElement(By.XPath("/html/body/div[4]/form/div/div[2]/div/input"));
             TypeCodeEdit.Clear();
-            TypeCodeEdit.SendKeys("ICTESTNEW");
+            TypeCodeEdit.SendKeys("ICTESTNEWAGAIN");
             Thread.Sleep(1000);
             IWebElement saveButtonEdit = webDriver.FindElement(By.XPath("//*[@id=\"SaveButton\"]"));
             saveButtonEdit.Click();
@@ -84,7 +89,7 @@ namespace TurnUpPortalLogin.Pages
 
             //Verify edited type code from last page
             IWebElement editTypeCode = webDriver.FindElement(By.XPath("/html/body/div[4]/div/div/div[3]/table/tbody/tr[last()]/td[1]"));
-            if (editTypeCode.Text == "ICTESTNEW")
+            if (editTypeCode.Text == "ICTESTNEWAGAIN")
             {
                 Console.WriteLine(" Type Code is edited successfully");
             }
@@ -96,13 +101,23 @@ namespace TurnUpPortalLogin.Pages
         public void DeleteTimeRecord(IWebDriver webDriver) 
         {
             //Delete the type code
+            Thread.Sleep(2000);
+            IWebElement lastpageButton = webDriver.FindElement(By.XPath("/html/body/div[4]/div/div/div[4]/a[4]/span"));
+            lastpageButton.Click();
+
             IWebElement deleteButton = webDriver.FindElement(By.XPath("/html/body/div[4]/div/div/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
             deleteButton.Click();
+            Thread.Sleep(1000);
+            webDriver.SwitchTo().Alert().Accept();
+
         }
         public void VerifyDeleteTimeRecord(IWebDriver webDriver)
         {
             Thread.Sleep(3000);
-            webDriver.SwitchTo().Alert().Accept();
+            IWebElement lastpageButton = webDriver.FindElement(By.XPath("/html/body/div[4]/div/div/div[4]/a[4]/span"));
+            lastpageButton.Click();
+
+            
             try
             {
                 IWebElement editTypeCodeD = webDriver.FindElement(By.XPath("/html/body/div[4]/div/div/div[3]/table/tbody/tr[4]"));
