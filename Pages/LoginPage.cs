@@ -10,11 +10,11 @@ namespace TurnUpPortalLogin.Pages
     public class LoginPage
     {
         private readonly By usernameTextboxLocator = By.Id("UserName");
-        IWebElement usernameTextbox;
+        IWebElement? usernameTextbox;
         private readonly By passwordTextboxLocator = By.Id("Password");
-        IWebElement passwordTextbox;
+        IWebElement? passwordTextbox;
         private readonly By loginButtonLocator = By.XPath("//*[@id=\"loginForm\"]/form/div[3]/input[1]");
-        IWebElement loginButton;
+        IWebElement? loginButton;
 
         public void LoginActions(IWebDriver webDriver,string username,string password)
         {

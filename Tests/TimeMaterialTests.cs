@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TurnUpPortalLogin.Pages;
 using TurnUpPortalLogin.Utilities;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
 
 namespace TurnUpPortalLogin.Tests
 {
@@ -34,7 +35,7 @@ namespace TurnUpPortalLogin.Tests
         public void TestCreateTMRecord()
         {
             //TM Page Object initialization and definition
-            TimeandMaterial timeandMaterialobj = new TimeandMaterial();
+            TimeandMaterialPage timeandMaterialobj = new TimeandMaterialPage();
             timeandMaterialobj.CreateNewTimeRecord(webDriver);
             timeandMaterialobj.VerifyNewlyCreatedTimeRecord(webDriver);
 
@@ -44,15 +45,15 @@ namespace TurnUpPortalLogin.Tests
         {
 
             //Edit Newly Created Time Record
-            TimeandMaterial editTimeobj = new TimeandMaterial();
+            TimeandMaterialPage editTimeobj = new TimeandMaterialPage();
             editTimeobj.EditNewTimeRecord(webDriver);
-            editTimeobj.VerifyEditedTimeRecord(webDriver);
+           editTimeobj.VerifyEditedTimeRecord(webDriver);
         }
         [Test,Order(3)]
         public void TestDeleteTMRecord() 
         {
             //Delete Time Record
-            TimeandMaterial delTimeobj = new TimeandMaterial();
+            TimeandMaterialPage delTimeobj = new TimeandMaterialPage();
             delTimeobj.DeleteTimeRecord(webDriver);
             delTimeobj.VerifyDeleteTimeRecord(webDriver);
 
@@ -60,6 +61,8 @@ namespace TurnUpPortalLogin.Tests
         [TearDown]
         public void CloseTestRun()
         {
+            webDriver.Quit();
+            
         }
     }
 }

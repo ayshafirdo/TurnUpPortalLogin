@@ -11,9 +11,9 @@ namespace TurnUpPortalLogin.Pages
     public class HomePage
     {
         private readonly By administrationDropdownLocator = By.XPath("/html/body/div[3]/div/div/ul/li[5]/a");
-        IWebElement administrationDropdown;
+        IWebElement? administrationDropdown;
         private readonly By tmOptionLocator = By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a");
-        IWebElement tmOption;
+        IWebElement? tmOption;
 
 
         public void NavigateToHomePage(IWebDriver webDriver) 
